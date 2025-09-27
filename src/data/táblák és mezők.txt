@@ -3,9 +3,9 @@ Táblák:
 | Mező neve  | Típus    | Megjegyzés            |
 | ---------- | -------- | --------------------- |
 | person_id  | int (PK) | Egyedi azonosító      |
-| full_name  | string   | Faker.name()          |
-| email      | string   | Faker.email()         |
-| birth_date | date     | Faker.date_of_birth() |
+| name  | string   | Faker.name()          |
+| age      | int   | Faker.random_int(10,99)         |
+| male | bool     | random |
 | city       | string   | Faker.city()          |
 
 
@@ -32,9 +32,9 @@ Kapcsolatok (a részvétel minden esetben opcionális):
 |    Person      |------------------->|     Review     |
 |----------------|                    |----------------|
 | person_id (PK) |                    | review_id (PK) |
-| full_name      |                    | person_id (FK) |
-| email          |                    | movie_id (FK)  |
-| birth_date     |                    | rating         |
+| name      |                    | person_id (FK) |
+| age          |                    | movie_id (FK)  |
+| male     |                    | rating         |
 | city           |                    | text           |
 +----------------+                    | date           |
                                       +----------------+
@@ -49,3 +49,4 @@ Kapcsolatok (a részvétel minden esetben opcionális):
 +----------------+                    | text           |
                                       | date           |
                                       +----------------+
+

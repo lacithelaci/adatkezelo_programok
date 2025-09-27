@@ -1,0 +1,51 @@
+Táblák:
+
+| Mező neve  | Típus    | Megjegyzés            |
+| ---------- | -------- | --------------------- |
+| person_id  | int (PK) | Egyedi azonosító      |
+| full_name  | string   | Faker.name()          |
+| email      | string   | Faker.email()         |
+| birth_date | date     | Faker.date_of_birth() |
+| city       | string   | Faker.city()          |
+
+
+| Mező neve | Típus    | Megjegyzés                 |
+| --------- | -------- | -------------------------- |
+| movie_id  | int (PK) | Egyedi azonosító           |
+| title     | string   | Faker.sentence(nb_words=3) |
+| year      | int      | Faker.year()               |
+| genre     | string   | Faker.word() pl. “Action”  |
+
+
+| Mező neve | Típus    | Megjegyzés                                     |
+| --------- | -------- | ---------------------------------------------- |
+| review_id | int (PK) | Egyedi azonosító                               |
+| person_id | int (FK) | Hivatkozás a Person.person_id-re, **kötelező** |
+| movie_id  | int (FK) | Hivatkozás a Movie.movie_id-re, **kötelező**   |
+| rating    | int      | Faker.random_int(1,5)                          |
+| text      | string   | Faker.text(max_nb_chars=200)                   |
+| date      | date     | Faker.date_this_year()                         |
+
+Kapcsolatok (a részvétel minden esetben opcionális):
+
++----------------+        1:N         +----------------+
+|    Person      |------------------->|     Review     |
+|----------------|                    |----------------|
+| person_id (PK) |                    | review_id (PK) |
+| full_name      |                    | person_id (FK) |
+| email          |                    | movie_id (FK)  |
+| birth_date     |                    | rating         |
+| city           |                    | text           |
++----------------+                    | date           |
+                                      +----------------+
+
++----------------+        1:N         +----------------+
+|     Movie      |------------------->|     Review     |
+|----------------|                    |----------------|
+| movie_id (PK)  |                    | review_id (PK) |
+| title          |                    | person_id (FK) |
+| year           |                    | movie_id (FK)  |
+| genre          |                    | rating         |
++----------------+                    | text           |
+                                      | date           |
+                                      +----------------+

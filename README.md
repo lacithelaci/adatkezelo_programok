@@ -34,5 +34,6 @@ A program a [Faker](https://faker.readthedocs.io/) könyvtárat használja az ad
 - Függőségek telepítése:  
   ```bash
   pip install -r requirements.txt
-python main.py
 ```
+python main.py
+

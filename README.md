@@ -29,11 +29,13 @@ A program a [Faker](https://faker.readthedocs.io/) könyvtárat használja az ad
 
 ## 🧭 Telepítés és futtatás
 
-### 1. Követelmények
+ 1. Követelmények
 - Python **3.10** vagy újabb  
-- Függőségek telepítése:  
+ Függőségek telepítése:  
   ```bash
   pip install -r requirements.txt
+
+2. Futtatás
 ```
 python main.py
 

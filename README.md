@@ -1,30 +1,38 @@
-# Projekt neve
+# 🎬 MovieReview – Filmes véleményező rendszer
 
-## Leírás
-Ez a projekt az *Adatkezelő programok fejlesztése* féléves beadandó feladata.  
-A program célja egy adathalmaz generálása, tárolása és feldolgozása a félév során tanult adatformátumok (CSV, JSON, XLSX) segítségével.  
-Az adatok a [Faker](https://faker.readthedocs.io/) könyvtár használatával kerülnek előállításra, több adattípus kezelésével és közöttük fennálló kapcsolatok definiálásával.  
+## 📌 Leírás
+Ez a projekt egy filmes véleményező alkalmazás, amely lehetővé teszi **felhasználók (Person)**, **filmek (Movie)** és **vélemények (Review)** kezelését.  
+A cél egy olyan rendszer létrehozása, ami képes valósághű adatok generálására, tárolására, feldolgozására és exportálására különböző formátumokban (CSV, JSON, XLSX).  
 
-## Funkcionalitás
-- Adathalmaz generálása a Faker API segítségével.
-- Többféle adattípus (pl. Person, Car, saját típus) kezelése.
-- Kapcsolatok támogatása az adattípusok között (1:1, 1:N, N:M).
-- Exportálás:
-  - **CSV**: minden adattípus külön fájl, első sor a mezők neveivel.
-  - **JSON**: minden adattípus külön lista, rekordokat leíró dokumentumokkal.
-  - **XLSX**: minden adattípus külön munkalapon.
-- Importálás: az adatok visszaolvasása a fenti formátumokból.
-- (Közepes szinttől) harmadik, saját tervezésű típus is.
-- (Jó szinttől) Oracle SQL kapcsolat, adattáblák és kapcsolatok létrehozása.
-- (Jeles szinttől) extra funkciók az adatkezeléshez.  
+A program a [Faker](https://faker.readthedocs.io/) könyvtárat használja az adatok előállításához, és támogatja az adattípusok közötti relációk létrehozását (1:N kapcsolatok).
 
-## Telepítés és futtatás
-1. **Követelmények**
-   - Python 3.10
-   - Függőségek (telepíthetők `requirements.txt` alapján):  
-     ```bash
-     pip install -r requirements.txt
-     ```
-2. **Futtatás**
-   ```bash
-   python main.py
+---
+
+## ⚡ Funkcionalitás
+- **Adatgenerálás**
+  - Véletlenszerű személyek, filmek és vélemények előállítása.
+  - Összetett kapcsolatok létrehozása az adattípusok között (pl. egy felhasználó több véleményt is írhat).
+- **Adatkezelés**
+  - Adatok tárolása és visszatöltése CSV, JSON és XLSX formátumban.
+  - Típusonként külön fájlok / munkalapok létrehozása exportáláskor.
+- **Importálás és exportálás**
+  - Adatok egyszerű visszatöltése a korábban mentett állapotból.
+  - Könnyen feldolgozható, jól strukturált kimeneti formátumok.
+- **Kapcsolatok kezelése**
+  - Person ↔ Review: 1:N kapcsolat  
+  - Movie ↔ Review: 1:N kapcsolat
+- **Bővíthetőség**
+  - Új adattípusok és extra funkciók egyszerűen hozzáadhatók.
+  - Adatbázis-integráció (pl. Oracle) támogatott.
+
+---
+
+## 🧭 Telepítés és futtatás
+
+### 1. Követelmények
+- Python **3.10** vagy újabb  
+- Függőségek telepítése:  
+  ```bash
+  pip install -r requirements.txt
+python main.py
+```

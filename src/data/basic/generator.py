@@ -21,7 +21,7 @@ def generate_people(n: int,
         name = generator.name_male() if male else generator.name_female()
         age = random.randint(min_age, max_age)
         city = generator.city()
-        people.append(Person(i, name, age, city,))
+        people.append(Person(i, name, age, city, male))
 
     return people
 

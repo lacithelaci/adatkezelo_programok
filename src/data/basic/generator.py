@@ -1,7 +1,8 @@
 from faker import Faker
 import random
-from model_dataclasses import Review, Person, Movie
+from data.basic.model_dataclasses import Review, Person, Movie
 import datetime
+
 
 # ───────────────────────────────
 # Személyek generálása
@@ -9,12 +10,12 @@ import datetime
 def generate_people(n: int,
                     male_ratio: float = 0.5,
                     locale: str = "en_US",
-                    unique: bool = True, # Ne ismétlődjenek a nevek
+                    unique: bool = True,  # Ne ismétlődjenek a nevek
                     min_age: int = 10,
                     max_age: int = 99) -> list[Person]:
     fake = Faker(locale)
     people = []
-    generator = fake.unique if unique else fake # Ez a sor biztosítja, hogy ne legyenek duplikált nevek
+    generator = fake.unique if unique else fake  # Ez a sor biztosítja, hogy ne legyenek duplikált nevek
 
     for i in range(1, n + 1):
         male = random.random() < male_ratio
@@ -24,6 +25,7 @@ def generate_people(n: int,
         people.append(Person(i, name, age, city, male))
 
     return people
+
 
 # ───────────────────────────────
 # Filmek generálása
@@ -50,6 +52,7 @@ def generate_movies(n: int,
 
     return movies
 
+
 # ───────────────────────────────
 # Vélemények generálása
 # ───────────────────────────────
@@ -74,6 +77,7 @@ def generate_reviews(n: int,
 
     return reviews
 
+
 # ───────────────────────────────
 # Tesztelés
 # ───────────────────────────────
@@ -93,4 +97,5 @@ if __name__ == "__main__":
     print("\nVélemények:")
     for r in reviews:
         print(r)
+
 

@@ -136,4 +136,42 @@ def read_review(wb: Workbook,
         row += 1
     return review
 
-    #Elméletileg lefut minden, teszteltem de nézz rá
+def read(entity_type: Type[object], workbook: openpyxl.Workbook,
+         sheet_name: str = None, heading: bool = True) -> list[object]:
+
+    if sheet_name is None:
+        if entity_type == Person:
+            sheet_name = "people"
+        elif entity_type == Movie:
+            sheet_name = "movie"
+        elif entity_type == Review:
+            sheet_name = "review"
+        else:
+            raise RuntimeError("Unknown type of entity")
+
+    if entity_type == Person:
+        return read_people(workbook, sheet_name=sheet_name, heading=heading)
+    elif entity_type == Movie:
+        return read_movie(workbook, sheet_name=sheet_name, heading=heading)
+    elif entity_type == Review:
+        return read_review(workbook, sheet_name=sheet_name, heading=heading)
+
+
+def write(entities: list[object], workbook: openpyxl.Workbook,
+          sheet_name: str = None, heading: bool = True) -> None:
+    if sheet_name is None:
+        if isinstance(entities[0], Person):
+            sheet_name = "people"
+        elif isinstance(entities[0], Movie):
+            sheet_name = "movie"
+        elif isinstance(entities[0], Review):
+            sheet_name = "review"
+        else:
+            raise RuntimeError("Unknown type of entity")
+
+    if isinstance(entities[0], Person):
+        return write_people([cast(Person, e) for e in entities], workbook, sheet_name=sheet_name, heading=heading)
+    elif isinstance(entities[0], Movie):
+        return write_movie([cast(Movie, e) for e in entities], workbook, sheet_name=sheet_name, heading=heading)
+    elif isinstance(entities[0], Review):
+        return write_review([cast(Review, e) for e in entities], workbook, sheet_name=sheet_name, heading=heading)

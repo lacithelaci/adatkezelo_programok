@@ -78,28 +78,50 @@ def read_reviews(path: str, file_name: str = "reviews", extension: str = ".csv",
                    datetime.strptime(row["date"], "%Y-%m-%d").date()) for row in rows]
 
 
-def write(entities: list[object], path: str, file_name: str = None, extension: str = None,
-          heading: bool = True, delimiter: str = ";") -> None:
-    if isinstance(entities[0], Person):
-        return write_people([cast(Person, e) for e in entities], path, file_name=file_name, extension=extension,
-                            heading=heading, delimiter=delimiter)
-    elif isinstance(entities[0], Movie):
-        return write_movies([cast(Movie, e) for e in entities], path, file_name=file_name, extension=extension,
-                            heading=heading, delimiter=delimiter)
-    elif isinstance(entities[0], Review):
-        return write_reviews([cast(Review, e) for e in entities], path, file_name=file_name, extension=extension,
-                             heading=heading, delimiter=delimiter)
+def write(entities: list[object], path: str,
+          file_name: str | None = None,
+          extension: str = ".csv",
+          heading: bool = True,
+          delimiter: str = ";") -> None:
+    if not entities:
+        raise ValueError("Cannot write empty entity list")
+
+    first = entities[0]
+
+    if isinstance(first, Person):
+        file_name = file_name or "people"
+        write_people([cast(Person, e) for e in entities], path,
+                     file_name=file_name, extension=extension,
+                     heading=heading, delimiter=delimiter)
+
+    elif isinstance(first, Movie):
+        file_name = file_name or "movie"
+        write_movies([cast(Movie, e) for e in entities], path,
+                     file_name=file_name, extension=extension,
+                     heading=heading, delimiter=delimiter)
+
+    elif isinstance(first, Review):
+        file_name = file_name or "review"
+        write_reviews([cast(Review, e) for e in entities], path,
+                      file_name=file_name, extension=extension,
+                      heading=heading, delimiter=delimiter)
+
     else:
-        raise RuntimeError("Unknown type of entity")
+        raise RuntimeError(f"Unknown entity type: {type(first).__name__}")
 
 
-def read(entity_type: Type[object], path: str, file_name: str = None, delimiter: str = ";") -> list[object]:
-    if entity_type == Person:
-        return read_people(path, file_name=file_name, delimiter=delimiter)
-    elif entity_type == Movie:
-        return read_movies(path, file_name=file_name, delimiter=delimiter)
-    elif entity_type == Review:
-        return read_reviews(path, file_name=file_name, delimiter=delimiter)
+def read(path: str,
+         file_name: str | None = None,
+         extension: str = ".csv",
+         delimiter: str = ";") -> list[object]:
+    if file_name is None:
+        raise ValueError("File name must be provided for automatic type detection")
+
+    if "people" in file_name:
+        return read_people(path, file_name=file_name, extension=extension, delimiter=delimiter)
+    elif "movie" in file_name:
+        return read_movies(path, file_name=file_name, extension=extension, delimiter=delimiter)
+    elif "review" in file_name:
+        return read_reviews(path, file_name=file_name, extension=extension, delimiter=delimiter)
     else:
-        raise RuntimeError("Unknown type of entity")
-
+        raise RuntimeError(f"Unknown file type: {file_name}")
